@@ -1,0 +1,64 @@
+<h2>Enter Gregorian Date:</h2> 
+
+
+<section>
+    <form [formGroup]="dateForm">
+        <mat-form-field appearance="outline">
+            <mat-label>Year</mat-label>
+            <input type="number" matInput formControlName="gyForm" />
+            <mat-error>Year is Required!</mat-error>
+        </mat-form-field><br/>
+
+
+        <mat-form-field appearance="outline">
+            <mat-label>Choose Month</mat-label>
+            <mat-select matInput formControlName="gmForm">
+                <mat-option value=1>January</mat-option>
+                <mat-option value=2>February</mat-option>
+                <mat-option value=3>March</mat-option>
+                <mat-option value=4>April</mat-option>
+                <mat-option value=5>May</mat-option>
+                <mat-option value=6>June</mat-option>
+                <mat-option value=7>July</mat-option>
+                <mat-option value=8>August</mat-option>
+                <mat-option value=9>September</mat-option>
+                <mat-option value=10>October</mat-option>
+                <mat-option value=11>November</mat-option>
+                <mat-option value=12>December</mat-option>
+            </mat-select>
+            <mat-error>Month is Required!</mat-error>
+        </mat-form-field><br/>
+      
+        <mat-form-field appearance="outline">
+            <mat-label>Choose A Day</mat-label>
+            <mat-select  formControlName="gdForm">
+                <mat-option *ngFor='let in of counter(31) ;let i = index' [value]=i+1> {{i+1}}</mat-option> 
+            </mat-select>
+            <mat-error>Day is Required!</mat-error>
+        </mat-form-field><br/>
+
+
+        <button mat-raised-button color="primary" (click)="getHebDate()" [disabled]="!dateForm.valid">Convert</button>
+
+    </form>
+</section><br/>
+
+
+
+<article *ngIf="hebDate" (click)="getHebDate()">
+    <h2>:תאריך עברי</h2>
+    <span class="font-bold">English:  </span>
+    <span> {{hebDate.hy}} {{hebDate.hm}} {{hebDate.hd}} </span><br/>
+
+    <span *ngIf="hebDate.events" class="font-bold"> Events: </span>
+    <span *ngIf="hebDate.events">  {{hebDate.events}}</span>
+
+    <span *ngIf="!hebDate.events" class="font-bold"> Events: </span>
+    <span *ngIf="!hebDate.events"> none </span>
+
+    <br/>
+    <span class="font-bold">עברית: </span>
+    <span>  {{hebDate.hebrew}} </span><br/>
+
+</article>
+
